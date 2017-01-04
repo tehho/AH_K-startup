@@ -3,24 +3,54 @@ alwaysontop := 0
 
 Gui, New, +Resize -MaximizeBox, Porteringsfullmakt
 
-Gui, Add, Button, x10 y10 w100 h24, Generera
-Gui, Add, DropDownList, vFormat x10 y40 w50, PDF||WAV
-Gui, Add, Edit, vNummer x10 y70 w100, Nummer det gäller
-Gui, Add, DropDownList, vOperatör x10 y100 w100, Qall||Teloteket|Fonia|SST Net|Fastcom|Tellit
-Gui, Add, Edit, vSlutfaktura x10 y130 w100, Slutfak
-GUi, Add, Edit, vKontaktnummer x10 y160 w100, Kontaktnr
-GUi, Add, Edit, vNamn x10 y190 w100 r1, Namn på företag/person
-Gui, Add, Edit, VKontakt x10 y220 w100, Kontaktperson
-Gui, Add, DateTime, VÖppnas x10 y250 w100,
+x := 10
+y := 10
+w := 100
+h := 25
+
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, Button, %settings%, Generera
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w
+Gui, Add, DropDownList, vFormat %settings%, PDF||WAV
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, Edit, vNummer %settings%, Nummer det gÃ¤ller
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w
+Gui, Add, DropDownList, vOperatÃ¶r %settings%, Qall||Teloteket|Fonia|SST Net|Fastcom|Tellit
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, Edit, vSlutfaktura %settings%, Slutfak
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+GUi, Add, Edit, vKontaktnummer %settings%, Kontaktnr
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+GUi, Add, Edit, vNamn %settings%, Namn pÃ¥ fÃ¶retag/person
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, Edit, VKontakt %settings%, Kontaktperson
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, DateTime, VÃ–ppnas %settings%,
 
 Menu, FileMenu, Add, Generera`tCtrl+G, MenuFileMenuGenerera
 Menu, FileMenu, Add, Generera SMS`tCtrl+S, MenuFileMenuGenereraSMS
 Menu, FileMenu, Add, Generera Text`tCtrl+T, MenuFileMenuGenereraText
 Menu, FileMenu, Add, Restart, MenuFileMenuRestart
 Menu, FileMenu, Add, Always on Top, MenuFileMenuAlwaysonTop
-Menu, MyMenuBar, Add, File, :FileMenu
-Menu, MyMenuBar, Add, Restart, MenuFileMenuRestart
-Menu, MyMenuBar, Add, Edit, MenuFileMenuEdit
+Menu, MyMenuBar, Add, &File, :FileMenu
+Menu, MyMenuBar, Add, &Restart, MenuFileMenuRestart
+Menu, MyMenuBar, Add, &Edit, MenuFileMenuEdit
 
 Gui, Menu, MyMenuBar
 
@@ -33,10 +63,10 @@ GuiClose:
 return
 
 GuiEscape:
-	GuiControl,, Nummer, Nummer det gäller
+	GuiControl,, Nummer, Nummer det gÃ¤ller
 	GuiControl,, Slutfaktura, Slutfak
 	GuiControl,, Kontaktnummer, Kontaktnr
-	GuiControl,, Namn, Namn på företag/person
+	GuiControl,, Namn, Namn pÃ¥ fÃ¶retag/person
 	GuiControl,, Kontakt, Kontaktperson
 
 	Gui, Show
@@ -72,32 +102,32 @@ MenuFileMenuGenereraSMS:
 	StringLeft, fornamn, Kontakt, pos
 
 	ret := "Hej " . fornamn . ",`r`n" 
-		ret .= "Vi har försökt att nå dig gällande en beställd nummerflytt till en ny operatör, " . Operatör . ", och avslut av era abonnemang hos oss på Telenor.`r`n"
+		ret .= "Vi har fÃ¶rsÃ¶kt att nÃ¥ dig gÃ¤llande en bestÃ¤lld nummerflytt till en ny operatÃ¶r, " . OperatÃ¶r . ", och avslut av era abonnemang hos oss pÃ¥ Telenor.`r`n"
 	if InStr(Format, "PDF")
-		ret .= "Nummerflytten är inkommen med en fullmakt och är underskriven av " . Kontakt . ".`r`n"
+		ret .= "Nummerflytten Ã¤r inkommen med en fullmakt och Ã¤r underskriven av " . Kontakt . ".`r`n"
 	else
-		ret .= "Nummerflytten är inkommen som en inspelning och är godkänd av " . Kontakt . ".`r`n`r`n"
-	ret .= "Nummerflytten gäller nummer " . Nummer . ".`r`n`r`n"
-	ret .= "Eftersom det finns bindningstid kvar kommer du i samband med nummerflytten till den nya operatören få resterande bindningstid på en slutfaktura med en klumpsumma på " . Slutfaktura . " kr.`r`n`r`n"
-	ret .= "Då vi ej lyckats nå dig kommer vi nu att släppa spärren för att nummerflytten skall gå igenom.`r`n"
-	ret .= "Är det så att ni vill avbryta nummerflytten till den nya operatören, ber vi er kontakta er nya operatör för att avbryta flytten.`r`n"
-	ret .= Operatör . " kundservice: "
-	if InStr(Operatör, "Qall")
+		ret .= "Nummerflytten Ã¤r inkommen som en inspelning och Ã¤r godkÃ¤nd av " . Kontakt . ".`r`n`r`n"
+	ret .= "Nummerflytten gÃ¤ller nummer " . Nummer . ".`r`n`r`n"
+	ret .= "Eftersom det finns bindningstid kvar kommer du i samband med nummerflytten till den nya operatÃ¶ren fÃ¥ resterande bindningstid pÃ¥ en slutfaktura med en klumpsumma pÃ¥ " . Slutfaktura . " kr.`r`n`r`n"
+	ret .= "DÃ¥ vi ej lyckats nÃ¥ dig kommer vi nu att slÃ¤ppa spÃ¤rren fÃ¶r att nummerflytten skall gÃ¥ igenom.`r`n"
+	ret .= "Ã„r det sÃ¥ att ni vill avbryta nummerflytten till den nya operatÃ¶ren, ber vi er kontakta er nya operatÃ¶r fÃ¶r att avbryta flytten.`r`n"
+	ret .= OperatÃ¶r . " kundservice: "
+	if InStr(OperatÃ¶r, "Qall")
 		ret .= "0771-400 100"
-	else if InStr(Operatör, "Teloteket")
+	else if InStr(OperatÃ¶r, "Teloteket")
 		ret .= "0770-25 25 25"	
-	else if InStr(Operatör, "Fonia")
+	else if InStr(OperatÃ¶r, "Fonia")
 		ret .= "0770-221 221 "	
-	else if InStr(Operatör, "SST Net")
+	else if InStr(OperatÃ¶r, "SST Net")
 		ret .= "020 - 121 131"
-	else if InStr(Operatör, "Fastcom")
+	else if InStr(OperatÃ¶r, "Fastcom")
 		ret .= "0771 - 18 40 50"
-	else if InStr(Operatör, "Tellit")
+	else if InStr(OperatÃ¶r, "Tellit")
 		ret .= "020 - 120 28 82"
 	ret .= "`r`n`r`n"
-	ret .= "Om allt är i sin ordning är det bara att ignorera detta meddelande så kommer vi att avsluta era abonnemang och skicka en slutfaktura till er i samband med flytten.`r`n`r`n"
+	ret .= "Om allt Ã¤r i sin ordning Ã¤r det bara att ignorera detta meddelande sÃ¥ kommer vi att avsluta era abonnemang och skicka en slutfaktura till er i samband med flytten.`r`n`r`n"
 	ret .= "Ha en fortsatt trevlig dag!`r`n`r`n"
-	ret .= "Med vänliga hälsningar`r`n`r`n"
+	ret .= "Med vÃ¤nliga hÃ¤lsningar`r`n`r`n"
 	ret .= "Telenor Kundservice"
 
 	clipboard := ret
@@ -117,19 +147,19 @@ MenuFileMenuGenereraText:
 		{
 			GuiControl,ChooseString, Format,%value%
 		}
-		else if InStr(x, "Gäller")
+		else if InStr(x, "GÃ¤ller")
 		{
 			GuiControl,, NUmmer,%value%
 		}
-		else if InStr(x, "Operatör")
+		else if InStr(x, "OperatÃ¶r")
 		{
-			GuiControl,ChooseString, Operatör,%value%
+			GuiControl,ChooseString, OperatÃ¶r,%value%
 		}
 		else if InStr(x, "Slutfaktura")
 		{
 			GuiControl,, Slutfaktura,%value%
 		}
-		else if InStr(x, "nås på")
+		else if InStr(x, "nÃ¥s pÃ¥")
 		{
 			GuiControl,, Kontaktnummer,%value%
 		}
@@ -141,9 +171,9 @@ MenuFileMenuGenereraText:
 		{
 			GuiControl,, Kontakt,%value%
 		}
-		else if InStr(x, "Öpnnas")
+		else if InStr(x, "Ã–pnnas")
 		{
-			GuiControl,, Öpnnas,%value%
+			GuiControl,, Ã–pnnas,%value%
 		}
 	}
 	
@@ -154,31 +184,31 @@ return
 MenuFileMenuGenerera:
 ButtonGenerera:
 	Gui, Submit
-	ret := "Godkänd Porteringsfullmakt format: " . Format 
-	ret .= "`r`nGäller nummer: " . Nummer 
-	ret .= "`r`nOperatör: " . Operatör 
-	ret .= "`r`nNummer till operatör: "
-	if InStr(Operatör, "Qall")
+	ret := "GodkÃ¤nd Porteringsfullmakt format: " . Format 
+	ret .= "`r`nGÃ¤ller nummer: " . Nummer 
+	ret .= "`r`nOperatÃ¶r: " . OperatÃ¶r 
+	ret .= "`r`nNummer till operatÃ¶r: "
+	if InStr(OperatÃ¶r, "Qall")
 		ret .= "0771-400 100"
-	else if InStr(Operatör, "Qall")
+	else if InStr(OperatÃ¶r, "Qall")
 		ret .= "0771-400 100"	
-	else if InStr(Operatör, "Teloteket")
+	else if InStr(OperatÃ¶r, "Teloteket")
 		ret .= "0770-25 25 25"	
-	else if InStr(Operatör, "Fonia")
+	else if InStr(OperatÃ¶r, "Fonia")
 		ret .= "0770-221 221 "	
-	else if InStr(Operatör, "SST Net")
+	else if InStr(OperatÃ¶r, "SST Net")
 		ret .= "020 - 121 131"	
-	else if InStr(Operatör, "Fastcom")
+	else if InStr(OperatÃ¶r, "Fastcom")
 		ret .= "0771 - 18 40 50"
-	else if InStr(Operatör, "Tellit")
+	else if InStr(OperatÃ¶r, "Tellit")
 		ret .= "020 - 120 28 82"	
 	ret .= "`r`nSlutfaktura: " . Slutfaktura
-	ret .= "`r`nKund nås på: " . Kontaktnummer
+	ret .= "`r`nKund nÃ¥s pÃ¥: " . Kontaktnummer
 	ret .= "`r`nNamn: " . Namn
 	ret .= "`r`nKontaktperson: " . Kontakt
 
-	FormatTime, Test, %Öppnas%, dd/MM/yy
-	ret .= "`r`nÖppnas: " . Test
+	FormatTime, Test, %Ã–ppnas%, dd/MM/yy
+	ret .= "`r`nÃ–ppnas: " . Test
 	ret .= "`r`n"
 	clipboard := ret
 	Gui, Show,, Porteringsfullmakt
