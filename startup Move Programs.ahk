@@ -1,8 +1,5 @@
+#include G:\SME BO\Autostart\Default.ahk
 
-
-Suspend, off
-
-m_tab_delay = 300
 
 
 List := Get_ID_List()
@@ -16,7 +13,7 @@ for i, value in List
 }
 
 
-MsgBox, 262147, Startup Move, Har du dubblesk‰rm?, 600
+MsgBox, 262147, Startup Move, Har du dubblesk√§rm?, 600
 
 File := 0
 
@@ -68,41 +65,4 @@ CopyAreaBass(x,y,w,h)
 	temp_y := y + h
 	Click up, %temp_x%, %temp_y%
 	;Click right, 100, 100
-}
-
-
-
-Get_ID_List()
-{
-	WinGet, Title, List
-	ret := []
-	Loop, %Title%
-	{
-		temp_id := Title%A_Index%
-		WinGetTitle, temp_title ,ahk_id %temp_id%
-		ret.Push(temp_title)
-	}
-	Return ret
-}
-
-GetTitle()
-{
-	WinGetActiveTitle, ret
-	return ret
-}
-
-Min(l,r)
-{
-	if(l < r)
-		return l
-	else
-		return r
-}
-
-Max(l,r)
-{
-	if(l > r)
-		return l
-	else
-		return r
 }
