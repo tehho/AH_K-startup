@@ -1,0 +1,67 @@
+@:Namn
+Andreas A
+@
+
+@:Välkommen
+Hej!
+Tack för ditt mail!
+@
+
+Vi har väldigt mycket mail just nu, så för snabbare hantering av ditt ärende vid eventuella följdfrågor finns möjligheten att ringa in till vår kundservice på 020-222 222.  
+
+@:NPS_Svenska
+Vi skulle uppskatta att få din hjälp att förbättra kvaliteten i vår kundservice och hoppas att du har möjlighet att svara på skalan 0 - 10 hur vårt bemötande har varit, klicka på länken nedan:
+
+@
+
+@:Avslut
+
+Ha en trevlig dag!
+
+Med vänliga hälsningar
+Andreas Alm
+
+Telenor Sverige AB
+Kundservice
+
+
+@
+
+@:Avslut_helg
+
+Ha en trevlig helg!
+
+Med vänliga hälsningar
+Andreas Alm
+
+Telenor Sverige AB
+Kundservice
+
+
+@
+
+@Enter Divider
+@
+
+@:Welcome
+Hello!
+Thanks for your email!
+@
+
+@: NPS_English
+We would appreciate your help to improve the quality of our customer service and hope you have the opportunity to respond in a scale of 0-10 how our attitude has been, please click the link below:
+
+@
+
+@:End
+
+Have a nice day!
+
+Best regards
+Andreas Alm
+
+Telenor Sverige 3AB
+Customer service
+
+
+@
