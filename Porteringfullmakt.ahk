@@ -249,7 +249,7 @@ GetNextDate()
 	FormatTime, month, %date%, MM
 	FormatTime, Date, %date%, dd
 
-	month += 2
+	month += 3
 
 	month := MOD(month , 12) + 1
 
