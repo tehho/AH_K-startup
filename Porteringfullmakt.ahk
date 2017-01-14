@@ -33,6 +33,10 @@ GUi, Add, Edit, vKontaktnummer %settings%, Kontaktnr
 
 y := y + h + 5
 settings := "x" . x . " y" . y . " w" . w . " h" . h
+Gui, Add, Checkbox, vForetag %settings%, Företag?
+
+y := y + h + 5
+settings := "x" . x . " y" . y . " w" . w . " h" . h
 GUi, Add, Edit, vNamn %settings%, Namn på företag/person
 
 y := y + h + 5
@@ -108,7 +112,12 @@ MenuFileMenuGenereraSMS:
 	else
 		ret .= "Nummerflytten är inkommen som en inspelning och är godkänd av " . Kontakt . ".`r`n`r`n"
 	ret .= "Nummerflytten gäller nummer " . Nummer . ".`r`n`r`n"
-	ret .= "Eftersom det finns bindningstid kvar kommer du i samband med nummerflytten till den nya operatören få resterande bindningstid på en slutfaktura med en klumpsumma på " . Slutfaktura . " kr.`r`n`r`n"
+	ret .= "Eftersom det finns bindningstid kvar kommer du i samband med nummerflytten till den nya operatören få resterande bindningstid på en slutfaktura med en klumpsumma på " . Slutfaktura 
+        if( Foretag = 1)
+		ret .= "kr ex. moms."
+        else if( Foretag = 0)
+		ret .= "kr."
+	ret .= "`r`n`r`n"
 	ret .= "Då vi ej lyckats nå dig kommer vi nu att släppa spärren för att nummerflytten skall gå igenom.`r`n"
 	ret .= "Är det så att ni vill avbryta nummerflytten till den nya operatören, ber vi er kontakta er nya operatör för att avbryta flytten.`r`n"
 	ret .= Operatör . " kundservice: "
